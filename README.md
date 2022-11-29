@@ -64,7 +64,7 @@ def main(args):
 Register the hook using:
 
 ```sh
-pre-pip register ./demo.py
+pre-pip add ./demo.py
 ```
 
 You can view the list of registered hooks using:
