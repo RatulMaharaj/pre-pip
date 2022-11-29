@@ -1,19 +1,34 @@
-## Pre-pip
+<p align="center" style="height: 3em;">
+    <img src="pre-pip.svg" alt="" align="center"></img>
+</p>
+<p align="center">
+    <em>Run some python code just before your pip commands.</em>
+</p>
 
-`pre-pip` is a tool that allows you to run something before a pip command is executed.
+<p align="center">    
+<a href="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-publish.yml" target="_blank">
+    <img src="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-publish.yml/badge.svg" alt="Publish">
+</a>
+<a href="https://pypi.org/project/pre-pip" target="_blank">
+    <img src="https://img.shields.io/pypi/v/pre-pip?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+</p>
 
-### Suggested use cases:
+<hr/>
+
+### Use cases
 
 - Before installing a package, check it against a list of known malicious packages.
 - Upgrade pip automatically before installing a package.
+- Inject pip proxy settings into the environment before installing a package.
 
 You can use it to run any custom python code before a pip command is executed.
 
-### Supported terminals
+### Supported shells
 
-Currently only `zsh` is supported.
+Currently only `zsh` is supported, I'm currently working on adding support `bash` and `powershell`.
 
-Contributions for other shells are welcome.
+Contributions for any other shells are welcome.
 
 ### Installation
 
