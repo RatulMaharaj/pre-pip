@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pre-pip"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Ratul Maharaj <ratulmaharaj@looped.co.za>"]
 readme = "README.md"
