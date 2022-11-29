@@ -78,16 +78,45 @@ def list():
 
 
 @cli.command()
-def run():
-    """Run a pre-pip hook."""
-    rprint("NOT YET IMPLEMENTED.")
-
-
-@cli.command()
 @click.option("--all", is_flag=True, help="Remove all pre-pip hooks.")
-def remove():
+@click.argument("hook", nargs=1, required=False)
+def remove(hook, all):
     """Remove a pre-pip hook."""
-    rprint("NOT YET IMPLEMENTED.")
+    if all:
+        # remove all hooks
+        hooks = os.listdir(HOOKS_DIR)
+        for hook in hooks:
+            if hook.endswith(".py") and hook != "__init__.py":
+                os.remove(os.path.join(HOOKS_DIR, hook))
+
+        # reset __init__.py
+        with open(os.path.join(HOOKS_DIR, "__init__.py"), "w") as f:
+            f.write("")
+
+        rprint("All hooks removed successfully!")
+    else:
+        if hook is None:
+            rprint(
+                "[bold red]ERROR:[/bold red] Please specify a hook or use the --all flag."
+            )
+            sys.exit()
+        else:
+            # remove specified hook
+            if os.path.isfile(os.path.join(HOOKS_DIR, f"{hook}.py")):
+                os.remove(os.path.join(HOOKS_DIR, f"{hook}.py"))
+
+                # remove the import statement from __init__.py
+                with open(os.path.join(HOOKS_DIR, "__init__.py"), "r") as f:
+                    lines = f.readlines()
+
+                with open(os.path.join(HOOKS_DIR, "__init__.py"), "w") as f:
+                    for line in lines:
+                        if f"from .{hook} import main as {hook}" not in line:
+                            f.write(line)
+
+                rprint(
+                    f"[italic green]pre-pip[/italic green] hook removed successfully!"
+                )
 
 
 if __name__ == "__main__":
