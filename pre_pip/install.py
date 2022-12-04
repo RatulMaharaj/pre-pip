@@ -40,6 +40,12 @@ def install_rc(shell: str):
         )
         sys.exit()
 
+    # check if rc file exists
+    if not os.path.isfile(os.path.expanduser(f"~/.{shell}rc")):
+        # create it if it doesn't exist
+        with open(os.path.expanduser(f"~/.{shell}rc"), "w") as f:
+            f.write("")
+
     # check for pre-pip in .zshrc
     with open(os.path.expanduser(f"~/.{shell}rc"), "r") as f:
         shell_rc = f.read()
