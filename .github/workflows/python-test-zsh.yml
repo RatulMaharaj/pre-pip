@@ -1,4 +1,4 @@
-name: Test zsh
+name: pytest zsh
 
 on:
   push:

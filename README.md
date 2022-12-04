@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-publish.yml" target="_blank">
-    <img src="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-publish.yml/badge.svg" alt="Publish">
+<a href="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-test-zsh.yml" target="_blank">
+    <img src="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-test-zsh.yml/badge.svg" alt="pytest zsh">
 </a>
 <a href="https://pypi.org/project/pre-pip" target="_blank">
     <img src="https://img.shields.io/pypi/v/pre-pip?color=%2334D058&label=pypi%20package" alt="Package version">
