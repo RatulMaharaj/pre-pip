@@ -1,5 +1,5 @@
 <p align="center" style="height: 3em;">
-    <img src="pre-pip.svg" alt="pre-pip" align="center"></img>
+    <img src="https://raw.githubusercontent.com/RatulMaharaj/pre-pip/main/pre-pip.svg" alt="pre-pip" align="center"></img>
 </p>
 <p align="center">
     <em>Run some python code just before your pip commands.</em>
