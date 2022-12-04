@@ -1,5 +1,5 @@
 # version and package info
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "Ratul Maharaj"
 __email__ = "ratulmaharaj@looped.co.za"
 

@@ -22,9 +22,10 @@ def install():
     shell = os.environ.get("SHELL", "sh")
 
     if "zsh" in shell:
-        install_zsh()
-    # elif "bash" in shell:
-    #     install_bash()
+        install_rc("zsh")
+    elif "bash" in shell:
+        install_bash_preexec()
+        install_rc("bash")
     else:
         rprint(
             f"[italic green]pre-pip[/italic green] is unfortunately not currently supported for {shell}."
@@ -32,33 +33,43 @@ def install():
         sys.exit()
 
 
-def install_zsh():
-    # check for pre-pip in .zshrc
-    with open(os.path.expanduser("~/.zshrc"), "r") as f:
-        zshrc = f.read()
+def install_rc(shell: str):
+    if shell not in ["bash", "zsh"]:
+        rprint(
+            f"[italic green]pre-pip[/italic green] is unfortunately not currently supported for {shell}."
+        )
+        sys.exit()
 
-    if "pre-pip" not in zshrc:
+    # check for pre-pip in .zshrc
+    with open(os.path.expanduser(f"~/.{shell}rc"), "r") as f:
+        shell_rc = f.read()
+
+    if "pre-pip" not in shell_rc:
         # installing pre-pip
-        with open(os.path.expanduser("~/.zshrc"), "a") as f:
+        with open(os.path.expanduser(f"~/.{shell}rc"), "a") as f:
             f.write("\n")
             f.write(pre_pip_script)
 
         rprint("[italic green]pre-pip[/italic green] was installed! \n")
 
-        # ask to reload .zshrc
+        # ask to reload shell rc file
         rprint(
-            "Please run `[cyan]source ~/.zshrc[/cyan]` to reload your configuration."
+            f"Please run `[cyan]source ~/.{shell}rc[/cyan]` to reload your configuration."
         )
     else:
         rprint("[italic green]pre-pip[/italic green] is already installed!")
 
 
-def install_bash():
-    print("detected shell to be bash")
+def install_bash_preexec():
+    # check if .bashrc exists
+    if not os.path.isfile(os.path.expanduser("~/.bashrc")):
+        # create .bashrc if it doesn't exist
+        with open(os.path.expanduser("~/.bashrc"), "w") as f:
+            f.write("")
+
     # check if .bash-preexec.sh exists
     if not os.path.isfile(os.path.expanduser("~/.bash-preexec.sh")):
         # Save .bash-preexec.sh to ~/.bash-preexec.sh
-        print("installing .bash-preexec.sh")
         subprocess.Popen(
             [
                 "wget",
@@ -67,14 +78,6 @@ def install_bash():
                 "https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh",
             ]
         )
-    else:
-        print(".bash-preexec.sh already installed")
-
-    # check if .bashrc exists
-    if not os.path.isfile(os.path.expanduser("~/.bashrc")):
-        # create .bashrc
-        print("~/.bashrc not found, creating it now.")
-        subprocess.Popen(["touch", "~/.bashrc"])
 
     # check if .bashrc contains the source command
     with open(os.path.expanduser("~/.bashrc"), "r") as f:
