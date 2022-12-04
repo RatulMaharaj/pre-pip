@@ -1,4 +1,4 @@
-name: pytest zsh
+name: pytest bash
 
 on:
   push:
@@ -7,12 +7,12 @@ on:
     branches: ["main"]
 
 jobs:
-  pytest-zsh:
+  pytest-bash:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [ubuntu-latest]
         python-version: [3.11]
 
     steps:
@@ -25,14 +25,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Display Python version
-        run: zsh -c "python -c 'import sys; print(sys.version)'"
+        run: bash -c "python -c 'import sys; print(sys.version)'"
 
       - name: Install dependencies
         run: |
-          zsh -c "pip install --upgrade pip coverage pytest"
+          bash -c "pip install --upgrade pip coverage pytest"
 
       - name: Install package
-        run: zsh -c "pip install ."
+        run: bash -c "pip install ."
 
       - name: Test with pytest
-        run: export SHELL="/bin/zsh" && zsh -c "pytest"
+        run: export SHELL="/bin/bash" && bash -c "pytest"

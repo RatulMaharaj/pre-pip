@@ -9,6 +9,9 @@
 <a href="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-test-zsh.yml" target="_blank">
     <img src="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-test-zsh.yml/badge.svg" alt="pytest zsh">
 </a>
+<a href="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-test-bash.yml" target="_blank">
+    <img src="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-test-bash.yml/badge.svg" alt="pytest bash">
+</a>
 <a href="https://pypi.org/project/pre-pip" target="_blank">
     <img src="https://img.shields.io/pypi/v/pre-pip?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
@@ -26,7 +29,12 @@ You can use it to run any custom python code before a pip command is executed.
 
 ### Supported shells
 
-Currently only `zsh` is supported, I'm currently working on adding support `bash` and `powershell`.
+The following shells are currently supported:
+
+- `zsh`
+- `bash`
+
+I'm currently working on adding support for `powershell` and will thereafter look at `fish`.
 
 Contributions for any other shells are welcome.
 
