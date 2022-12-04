@@ -56,9 +56,10 @@ pre-pip install
 
 ### Register a custom demo hook
 
-Create a new file called `demo.py` in your current directory with the following content:
+Create a new file called `hook.py` in your current directory with the following content:
 
 ```python
+# hook.py
 from rich import print as rprint
 
 
@@ -72,7 +73,7 @@ def main(args):
 Register the hook using:
 
 ```sh
-pre-pip add ./demo.py
+pre-pip add hook.py
 ```
 
 You can view the list of registered hooks using:
