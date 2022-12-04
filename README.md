@@ -5,7 +5,7 @@
     <em>Run some python code just before your pip commands.</em>
 </p>
 
-<p align="center">    
+<p align="center">
 <a href="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-publish.yml" target="_blank">
     <img src="https://github.com/RatulMaharaj/pre-pip/actions/workflows/python-publish.yml/badge.svg" alt="Publish">
 </a>
