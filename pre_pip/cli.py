@@ -10,7 +10,7 @@ from . import __version__
 
 
 @click.group()
-@click.version_option(__version__)
+@click.version_option(__version__, message="pre-pip %(version)s")
 @click.pass_context
 def cli(ctx):
     """Welcome to the pre-pip CLI!"""
