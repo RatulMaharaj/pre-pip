@@ -64,7 +64,7 @@ def add(hook):
                     f.write(import_statement)
                     f.write("\n")
 
-        rprint(f"[italic green]pre-pip[/italic green] hook added successfully!")
+        rprint("[italic green]pre-pip[/italic green] hook added successfully!")
 
 
 @cli.command()
@@ -118,7 +118,7 @@ def remove(hook, all):
                             f.write(line)
 
                 rprint(
-                    f"[italic green]pre-pip[/italic green] hook removed successfully!"
+                    "[italic green]pre-pip[/italic green] hook removed successfully!"
                 )
 
 

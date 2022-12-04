@@ -1,7 +1,6 @@
 import os
 from click.testing import CliRunner
 from pre_pip.cli import install, uninstall, add, list, remove
-import subprocess
 
 
 def test_install():

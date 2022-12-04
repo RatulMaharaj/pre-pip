@@ -4,4 +4,4 @@ __author__ = "Ratul Maharaj"
 __email__ = "ratulmaharaj@looped.co.za"
 
 # imports
-from .main import main, HOOKS_DIR, scaffold_hooks_dir
+from .main import main, HOOKS_DIR, scaffold_hooks_dir  # noqa
