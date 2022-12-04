@@ -25,15 +25,18 @@ def install():
 
 
 @cli.command()
-def uninstall():
+@click.option("--no-prompt", "-np", is_flag=True, help="Do not prompt.")
+def uninstall(no_prompt):
     """Remove pre-pip from your shell."""
-    value = click.prompt(
-        "Are you sure you want to uninstall pre-pip? (y/n)",
-        type=bool,
-    )
-    if value:
-        uninstall_pre_pip()
-        rprint("[italic green]pre-pip[/italic green] was successfully uninstalled!")
+    if not no_prompt:
+        value = click.prompt(
+            "Are you sure you want to uninstall pre-pip? (y/n)",
+            type=bool,
+        )
+        if not value:
+            sys.exit()
+    uninstall_pre_pip()
+    rprint("[italic green]pre-pip[/italic green] was successfully uninstalled!")
 
 
 @cli.command()
