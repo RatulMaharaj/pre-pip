@@ -3,14 +3,6 @@ from click.testing import CliRunner
 from pre_pip.cli import install, uninstall, add, list, remove
 
 
-def test_pre_uninstall():
-    """Test uninstalling pre-pip."""
-    runner = CliRunner()
-    result = runner.invoke(uninstall, ["--no-prompt"])
-    assert result.exit_code == 0
-    assert "pre-pip was successfully uninstalled!" in result.output
-
-
 def test_install():
     """Test installing pre-pip."""
     runner = CliRunner()
@@ -22,10 +14,16 @@ def test_install():
     )
 
 
-def test_add():
-    """Test adding a pre-pip hook."""
+def test_add_remote_hook():
+    """Test adding a remote pre-pip hook."""
     runner = CliRunner()
-    result = runner.invoke(add, ["tests/hooks/test_hook.py"])
+    result = runner.invoke(
+        add,
+        [
+            "https://github.com/RatulMaharaj/pre-pip/blob/eba4aa8a4e0bf22cdefff7c1aad700f133082305/tests/hooks/test_hook.py",
+            "--no-prompt",
+        ],
+    )
     assert result.exit_code == 0
     assert "pre-pip hook added successfully!" in result.output
 
@@ -78,7 +76,7 @@ def test_remove():
     assert len(os.listdir(os.path.expanduser("~/pre-pip/hooks"))) == 1
 
 
-def test_post_uninstall():
+def test_uninstall():
     """Test uninstalling pre-pip."""
     runner = CliRunner()
     result = runner.invoke(uninstall, ["--no-prompt"])
