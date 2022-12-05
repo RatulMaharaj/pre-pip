@@ -40,11 +40,17 @@ Contributions for any other shells are welcome.
 
 ### Installation
 
+The recommended way to install `pre-pip` would be using `pipx`. This will enable you to use `pre-pip` with multiple python versions or across virtual environments.
+
+```sh
+pipx install pre-pip
+```
+
+Alternatively, you can install it with `pip`:
+
 ```sh
 pip install pre-pip
 ```
-
-There is potential to make this `pipx` installable.
 
 ### Usage
 
