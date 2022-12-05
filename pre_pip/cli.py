@@ -40,31 +40,55 @@ def uninstall(no_prompt):
 
 
 @cli.command()
-@click.argument("hook", type=click.Path(exists=True), required=True, nargs=1)
-def add(hook):
+@click.argument("hook", required=True, nargs=1)
+@click.option("--no-prompt", "-np", is_flag=True, help="Do not prompt.")
+def add(hook, no_prompt):
     """Add a pre-pip hook."""
-    # check if hook exists
-    if not os.path.isfile(hook):
-        rprint(
-            f"[bold red]ERROR:[/bold red] Specified hook [italic cyan]{hook}[/italic cyan] does not exist!"
-        )
-        sys.exit()
+    # check if url or path
+    if hook.startswith("http") and hook.endswith(".py"):
+        # download hook to hooks dir using curl
+        try:
+            rprint(
+                "[bold yellow]WARNING![/bold yellow] You are about to download arbitrary code from the internet."
+            )
+            if not no_prompt:
+                # prompt user to continue
+                value = click.prompt(
+                    "Do you trust the source and want to proceed? (y/n)",
+                    type=bool,
+                )
+                if not value:
+                    sys.exit()
+
+            os.system(f"curl -s {hook} -o {HOOKS_DIR}/{Path(hook).name}")
+        except Exception:
+            rprint(
+                f"[italic red]Error:[/italic red] Failed to download hook from [italic cyan]{hook}[/italic cyan]"
+            )
+            sys.exit()
     else:
-        # if it does, copy it to HOOKS_DIR
-        os.system(f"cp {hook} {HOOKS_DIR}")
+        # check if hook exists
+        if not os.path.isfile(hook):
+            rprint(
+                f"[bold red]ERROR:[/bold red] Specified hook [italic cyan]{hook}[/italic cyan] does not exist or is invalid!"
+            )
+            sys.exit()
+        else:
+            # if it does, copy it to HOOKS_DIR
+            os.system(f"cp {hook} {HOOKS_DIR}")
 
-        hook_no_ext = Path(hook).stem
+    hook_no_ext = Path(hook).stem
 
-        # update the init file
-        with open(os.path.join(HOOKS_DIR, "__init__.py"), "r") as f:
-            import_statement = f"from .{hook_no_ext} import main as {hook_no_ext}"
-            # check if the import statement already exists
-            if import_statement not in f.read():
-                with open(os.path.join(HOOKS_DIR, "__init__.py"), "a") as f:
-                    f.write(import_statement)
-                    f.write("\n")
+    # update the init file
+    with open(os.path.join(HOOKS_DIR, "__init__.py"), "r") as f:
+        import_statement = f"from .{hook_no_ext} import main as {hook_no_ext}"
+        # check if the import statement already exists
+        if import_statement not in f.read():
+            with open(os.path.join(HOOKS_DIR, "__init__.py"), "a") as f:
+                f.write(import_statement)
+                f.write("\n")
 
-        rprint("[italic green]pre-pip[/italic green] hook added successfully!")
+    rprint("[italic green]pre-pip[/italic green] hook added successfully!")
 
 
 @cli.command()
